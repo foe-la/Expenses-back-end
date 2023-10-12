@@ -4,26 +4,29 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 // const expensesController = require('./controllers/expenses');
 // const expense = require('./models/expenses');
-const connectDB = require('./config/database');
+// const connectDB = require('./config/database');
 
 const expenses = require('./routes/expenses');
 
 const app = express();
-const mongoURI = process.env.MONGO_URI;
-const PORT = process.env.PORT || 3030;
+// const mongoURI = process.env.MONGO_URI;
+const PORT = 3001;
 
 // Connecting to MongoDB
-mongoose.connect(mongoURI, { useNewUrlParser: true });
-db.on('error', (err) => console.log(err.message + ' Is MongoDB running?'));
-db.on('disconnected', () => console.log('MongoDB disconnected'));
-db.once('open', () => console.log('MongoDB connection established')); // Corrected the message
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+mongoose.connection.once("open", () => {
+  console.log("connected to mongo");
+});
 
 // Middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static('public'));
 app.use(cors({ 
-  origin: ["http://localhost:3005", "https://localhost:3030"]
+  origin: ["http://localhost:3005", "https://localhost:3031"]
 
 }));
 
