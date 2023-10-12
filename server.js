@@ -2,8 +2,11 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const expensesController = require('./controllers/expenses');
-const db = mongoose.connection;
+// const expensesController = require('./controllers/expenses');
+// const expense = require('./models/expenses');
+const connectDB = require('./config/database');
+
+const expenses = require('./routes/expenses');
 
 const app = express();
 const mongoURI = process.env.MONGO_URI;
@@ -19,10 +22,13 @@ db.once('open', () => console.log('MongoDB connection established')); // Correct
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static('public'));
-app.use(cors({ origin: '*' }));
+app.use(cors({ 
+  origin: ["http://localhost:3005", "https://localhost:3030"]
+
+}));
 
 // Routes
-app.use('/expenses', expensesController);
+app.use('/expenses', expenses);
 
 app.listen(PORT, () => {
   console.log('Listening on port:', PORT);

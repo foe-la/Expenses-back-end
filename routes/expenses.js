@@ -1,6 +1,6 @@
-const express = require('express');
+/const express = require('express');
 const router = express.Router();
-const Expenses = require('../models/expenses');
+const Expenses = require('../models/expense');
 // Remember INDUCES
 
 // Index
@@ -44,3 +44,18 @@ router.get('/:id', (req, res)=>{
 
 
 module.exports = router
+
+// const express = require('express');
+// const router = express.Router();
+// const { getExpenses, addExpense, deleteExpense } = require('../controllers/expenses');
+
+// router
+//   .route('/')
+//   .get(getExpenses)
+//   .post(addExpense);
+
+// router
+//   .route('/:id')
+//   .delete(deleteExpense);
+
+// module.exports = router;
